@@ -77,8 +77,8 @@ FLIGHT_CREATURE.prototype = {
         this.parameter = 0;
         this.positionX = this.renderer.canvasWidth /2
         this.positionY = this.renderer.canvasHeight 
-        this.velocityX = 0;
-        this.velocityY = -2;
+        this.velocityX *= 0.99 ;
+        this.velocityY *= 0.99;
         this.swingFactor = this.renderer.randomValue(0.5, 1)
         this.movementSpeed = 1
        
@@ -141,10 +141,9 @@ FLIGHT_CREATURE.prototype = {
 
             let gradient = context.createRadialGradient(0, 0, 0, 0, 0, 70),
                 wingEffect = Math.sin(this.angle / 5);
-            gradient.addColorStop(0, "hsl(280, 70%, 45%)");
-            gradient.addColorStop(0.3, "hsl(280, 70%, " + (45 + 10 * wingEffect) + "%)");
-            gradient.addColorStop(0.5, "hsl(280, 70%, " + (45 + 20 * wingEffect) + "%)");
-            gradient.addColorStop(1, "hsl(280, 70%, " + (45 + 30 * wingEffect) + "%)");
+                let color = wingEffect > 0 ? "hsl(280, 70%, 45%)" : "hsl(2, 87.80%, 48.20%)";
+                gradient.addColorStop(0, color);
+                gradient.addColorStop(0.3, "hsl(280, 70%, " + (45 + 10 * wingEffect) + "%)");
 
             context.lineWidth = 4;
             context.strokeStyle = "hsl(280, 70%, 80%)";
